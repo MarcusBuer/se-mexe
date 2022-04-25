@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-interface Props {
-  toggleTheme: () => void;
-}
+import { useSettings } from '../contexts/Settings';
 
-export default function Navbar({ toggleTheme }: Props) {
+export default function Navbar() {
+  const { theme } = useSettings();
+
   return (
     <NavbarStyled>
       <Link to='/'>
@@ -16,7 +16,7 @@ export default function Navbar({ toggleTheme }: Props) {
         <LinkStyled to='/'>Inicial</LinkStyled>
         <LinkStyled to='/session'>Inicie uma sessão</LinkStyled>
         <LinkStyled to='/session'>Apagar os dados</LinkStyled>
-        <button onClick={toggleTheme}>Tema</button>
+        <button onClick={theme.toggleTheme}>Tema</button>
       </div>
     </NavbarStyled>
   );
