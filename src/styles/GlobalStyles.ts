@@ -16,6 +16,7 @@ export const GlobalStyles = createGlobalStyle`
     scroll-behavior: smooth;
     box-sizing: inherit;
     width: 100%;
+    background-color: ${props => props.theme.colors.background};
   }
 
   // Scrollbar styles 
@@ -36,8 +37,7 @@ export const GlobalStyles = createGlobalStyle`
   body {
     margin: 0 auto;
     font-family: var(--font-main);
-    background-color: var(--white);
-    color: var(--black);
+    color: ${props => props.theme.colors.text};
     max-width: var(--max-width);
   }
 
@@ -47,31 +47,7 @@ export const GlobalStyles = createGlobalStyle`
 
   a {
     text-decoration: none;
-    color: var(--black);
+    color: ${props => props.theme.colors.text};
     transition: var(--transition);
-
-    :hover {
-      color: var(--blue)
-    }
-  }
-
-  .link {
-    position: relative;
-
-    :hover::after {
-      width: 100%;
-    }
-
-    ::after {
-      position: absolute;
-      content: '';
-      left: 0;
-      bottom: 0;
-      height: 2px;
-      border-radius: 1px;
-      width: 0px;
-      background-color: var(--blue);
-      transition: var(--transition);
-    }
   }
 `;
