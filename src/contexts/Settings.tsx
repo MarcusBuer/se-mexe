@@ -8,7 +8,7 @@ import DarkTheme from '../styles/Theme.Dark';
 import usePersistedState from '../hooks/usePersistedState';
 
 export const SettingsContext = React.createContext({
-  theme: { toggleTheme: () => {} },
+  theme: { toggleTheme: () => {}, current: {} as DefaultTheme },
 });
 
 type Props = {
@@ -26,7 +26,9 @@ export function SettingsProvider({ children }: Props) {
   };
 
   return (
-    <SettingsContext.Provider value={{ theme: { toggleTheme } }}>
+    <SettingsContext.Provider
+      value={{ theme: { current: theme, toggleTheme } }}
+    >
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         {children}

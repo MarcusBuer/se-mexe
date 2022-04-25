@@ -1,9 +1,10 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
 
 import Home from './pages/Home';
 import Session from './pages/Session';
+
+import Navbar from './components/Navbar';
 
 export default () => {
   return (

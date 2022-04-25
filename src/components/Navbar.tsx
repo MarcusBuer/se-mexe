@@ -10,13 +10,14 @@ export default function Navbar() {
   return (
     <NavbarStyled>
       <Link to='/'>
-        <h1>Se mexe!</h1>
+        <h1 className='Logo'>Se mexe!</h1>
       </Link>
       <div>
         <LinkStyled to='/'>Inicial</LinkStyled>
         <LinkStyled to='/session'>Inicie uma sessão</LinkStyled>
-        <LinkStyled to='/session'>Apagar os dados</LinkStyled>
-        <button onClick={theme.toggleTheme}>Tema</button>
+        <ButtonStyled onClick={theme.toggleTheme}>
+          {theme.current.title === 'Light' ? 'Dark Mode' : 'Light Mode'}
+        </ButtonStyled>
       </div>
     </NavbarStyled>
   );
@@ -26,11 +27,26 @@ const NavbarStyled = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  .Logo {
+    font-size: 1.5rem;
+    :hover {
+      color: ${props => props.theme.colors.navbartext};
+    }
+  }
 `;
 
 const LinkStyled = styled(Link)`
   padding: 0.5rem;
+  color: ${props => props.theme.colors.navbartext};
   :hover {
-    color: var(--blue);
+    color: ${props => props.theme.colors.navbarhover};
+  }
+`;
+
+const ButtonStyled = styled.button`
+  color: ${props => props.theme.colors.text};
+  :hover {
+    color: ${props => props.theme.colors.navbarhover};
   }
 `;
