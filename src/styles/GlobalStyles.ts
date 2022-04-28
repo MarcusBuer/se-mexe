@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+
 import Variables from './Variables';
 
 export const GlobalStyles = createGlobalStyle`
@@ -59,7 +60,7 @@ table {
     scroll-behavior: smooth;
     box-sizing: inherit;
     width: 100%;
-    background-color: ${props => props.theme.colors.background};
+    background: ${props => props.theme.colors.background};
   }
 
   // Scrollbar styles 
@@ -83,6 +84,7 @@ table {
     font-family: var(--font-main);
     color: ${props => props.theme.colors.text};
     max-width: var(--max-width);
+    background: transparent;
   }
 
   ul, li, ol {

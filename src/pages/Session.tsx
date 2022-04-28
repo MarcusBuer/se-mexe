@@ -30,7 +30,7 @@ const SessionStyled = styled.div`
   justify-content: center;
 
   height: 100vh;
-  background-color: ${props => props.theme.colors.background};
+  /* background-color: ${props => props.theme.colors.background}; */
   color: ${props => props.theme.colors.text};
   padding: 80px 0 0 0;
 

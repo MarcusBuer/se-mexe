@@ -1,6 +1,7 @@
 import produce, { Immutable } from 'immer'
 import React from 'react'
 
+import alarm from '../assets/mixkit-scanning-sci-fi-alarm-905.mp3';
 import usePersistedState from '../hooks/usePersistedState'
 
 export const PomodoroContext = React.createContext({
@@ -84,9 +85,14 @@ export function PomodoroProvider({ children }: Props) {
     cancelAnimationFrame(requestAnimationFrameId.current)
   }
 
+  const playAudio = () => {
+    new Audio(alarm).play();
+  }
+
   const changeIntervalHandler = () => {
     current === intervals.length - 1 ? setCurrent(0) : setCurrent(current + 1)
     stopHandler()
+    playAudio()
     setTimeout(() => startHandler(), 1000)
   }
 
