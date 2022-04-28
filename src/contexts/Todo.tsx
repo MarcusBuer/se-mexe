@@ -1,12 +1,19 @@
 import React from 'react';
-import produce from 'immer';
+import produce, { Immutable } from 'immer';
 
 import usePersistedState from '../hooks/usePersistedState';
 
-interface iCards {
-  id: number;
-  content: string;
-}
+type iList = Immutable<{
+  title: string;
+  creatable: boolean;
+  done: boolean;
+  cards: [
+    {
+      id: number;
+      content: string;
+    },
+  ];
+}>[];
 
 export const TodoContext = React.createContext({
   move: (
@@ -28,11 +35,13 @@ const baseList = [
   {
     title: 'Tarefas',
     creatable: true,
+    done: false,
     cards: [],
   },
   {
     title: 'Fazendo',
     creatable: false,
+    done: false,
     cards: [],
   },
   {
@@ -44,7 +53,7 @@ const baseList = [
 ];
 
 export function TodoProvider({ children }: Props) {
-  const [lists, setLists] = usePersistedState('lista', baseList);
+  const [lists, setLists] = usePersistedState<iList>('lista', baseList);
 
   const move = (source, sourceList, target, targetList) => {
     setLists(

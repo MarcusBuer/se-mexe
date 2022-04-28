@@ -6,7 +6,7 @@ import Card from './Card';
 import { useTodo } from '../../contexts/Todo';
 
 export default function List({ data, index: list }) {
-  const addItemRef = React.useRef();
+  const addItemRef = React.useRef(null);
   const [task, setTask] = React.useState('');
   const { addItem } = useTodo();
 
@@ -75,7 +75,12 @@ export default function List({ data, index: list }) {
   );
 }
 
-const CreateTask = styled.form`
+interface CreateTaskProps {
+  done?: boolean;
+  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+}
+
+const CreateTask = styled.form<CreateTaskProps>`
   z-index: 1;
   display: flex;
   flex: 1 1 0;
@@ -149,7 +154,7 @@ const CreateTask = styled.form`
   }
 `;
 
-const ListStyled = styled.div`
+const ListStyled = styled.div<CreateTaskProps>`
   display: flex;
   flex-direction: column;
   flex-basis: 100%;

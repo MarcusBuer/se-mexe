@@ -4,25 +4,40 @@ import { useDrag, useDrop } from 'react-dnd';
 import { useTodo } from '../../contexts/Todo';
 import { MdRemove } from 'react-icons/md';
 
-export default function Card({ data, index, list, canDrag }) {
-  const ref = React.useRef();
+interface iProps {
+  index: number;
+  data: any;
+  list: number;
+  canDrag: boolean;
+}
+
+export default function Card({ data, index, list, canDrag }: iProps) {
+  const ref = React.useRef(null);
   const { move, removeItem } = useTodo();
+
+  interface iTeste {
+    list: number;
+    index: number;
+    canDrag: boolean;
+  }
 
   const [{ isDragging }, dragRef] = useDrag({
     type: 'CARD',
-    item: {
-      index,
-      list,
-      canDrag,
+    item: () => {
+      return {
+        list,
+        index,
+        canDrag,
+      };
     },
-    collect: monitor => ({
+    collect: (monitor: any) => ({
       isDragging: monitor.isDragging(),
     }),
   });
 
   const [, dropRef] = useDrop({
     accept: 'CARD',
-    hover(item, monitor) {
+    hover(item: iTeste, monitor) {
       if (!item.canDrag) return;
       const source = item.index;
       const target = index;
@@ -78,7 +93,12 @@ export default function Card({ data, index, list, canDrag }) {
   );
 }
 
-const CardStyled = styled.li`
+interface CardStyledProps {
+  canDrag: boolean;
+  isDragging: boolean;
+}
+
+const CardStyled = styled.li<CardStyledProps>`
   display: flex;
   flex: 1 1 0;
   align-items: center;
