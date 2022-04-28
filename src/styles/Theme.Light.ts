@@ -12,6 +12,12 @@ const LightTheme = {
     text: '#333',
     navbartext: '#333',
     navbarhover: '#f21',
+
+    todoInputBackground: '#eee',
+    todoBackground: '#ccc',
+
+    clockBackground: '#ddd',
+    clockText: '#333',
   },
 };
 

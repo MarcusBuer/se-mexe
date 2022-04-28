@@ -12,6 +12,12 @@ const DarkTheme = {
     text: '#f5f5f5',
     navbartext: '#fff',
     navbarhover: '#f21',
+
+    todoInputBackground: '#666',
+    todoBackground: '#444',
+
+    clockBackground: '#222',
+    clockText: '#ddd',
   },
 };
 

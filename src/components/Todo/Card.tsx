@@ -104,7 +104,7 @@ const CardStyled = styled.li<CardStyledProps>`
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  background-color: #fff2;
+  background-color: ${props => props.theme.colors.todoBackground};
   border-radius: 5px;
   margin-bottom: 10px;
   padding: 10px;
@@ -143,8 +143,16 @@ const CardStyled = styled.li<CardStyledProps>`
     height: 24px;
     margin: 0 0 0 10px;
     border-radius: 50%;
-    background-color: ${props => props.theme.colors.background};
-    color: ${props => props.theme.colors.text};
+    background-color: ${props => props.theme.colors.text};
+    color: ${props => props.theme.colors.background};
+    border: 2px solid ${props => props.theme.colors.background};
+
+    :hover {
+      border: 2px solid ${props => props.theme.colors.text};
+      background-color: ${props => props.theme.colors.background};
+      color: ${props => props.theme.colors.text};
+      transform: scale(1.1);
+    }
 
     svg {
       position: absolute;

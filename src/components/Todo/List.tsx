@@ -17,7 +17,7 @@ export default function List({ data, index: list }) {
       setTask('');
       addItemRef.current.focus();
     } catch (error) {
-      alert('O campo não pode estar vazio');
+      addItemRef.current.focus();
     }
   };
 
@@ -87,13 +87,12 @@ const CreateTask = styled.form<CreateTaskProps>`
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  background: #fff;
+  background: ${props => props.theme.colors.todoInputBackground};
   border-radius: 5px;
   margin-bottom: 10px;
   padding: 10px;
   box-shadow: 0 1px 4px 0 rgba(192, 208, 230, 0.8);
   border-top: 2px solid rgba(230, 236, 245, 0.55);
-  cursor: grab;
 
   .cardHeader {
     width: 100%;
@@ -107,7 +106,7 @@ const CreateTask = styled.form<CreateTaskProps>`
   input {
     border: 0;
     outline: 0;
-    background-color: #fff;
+    background: ${props => props.theme.colors.todoInputBackground};
     display: flex;
     width: 100%;
     height: 100%;
@@ -145,8 +144,16 @@ const CreateTask = styled.form<CreateTaskProps>`
     height: 24px;
     margin: 0 0 0 10px;
     border-radius: 50%;
-    background-color: ${props => props.theme.colors.background};
-    color: ${props => props.theme.colors.text};
+    background-color: ${props => props.theme.colors.text};
+    color: ${props => props.theme.colors.background};
+    border: 2px solid ${props => props.theme.colors.background};
+
+    :hover {
+      border: 2px solid ${props => props.theme.colors.text};
+      background-color: ${props => props.theme.colors.background};
+      color: ${props => props.theme.colors.text};
+      transform: scale(1.1);
+    }
 
     svg {
       position: absolute;

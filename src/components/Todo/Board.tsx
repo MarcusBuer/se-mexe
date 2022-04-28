@@ -18,7 +18,10 @@ export default function Board() {
 
 const BoardStyled = styled.div`
   display: flex;
+
+  flex-direction: row;
   flex: 1;
   height: 100%;
+  width: 100%;
   gap: 20px;
 `;
