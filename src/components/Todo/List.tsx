@@ -1,25 +1,25 @@
-import React from 'react';
-import styled from 'styled-components';
-import { MdAdd } from 'react-icons/md';
+import React from 'react'
+import { MdAdd } from 'react-icons/md'
+import styled from 'styled-components'
 
-import Card from './Card';
-import { useTodo } from '../../contexts/Todo';
+import { useTodo } from '../../contexts/Todo'
+import Card from './Card'
 
 export default function List({ data, index: list }) {
-  const addItemRef = React.useRef(null);
-  const [task, setTask] = React.useState('');
-  const { addItem } = useTodo();
+  const addItemRef = React.useRef(null)
+  const [task, setTask] = React.useState('')
+  const { addItem } = useTodo()
 
   const handleSubmit = e => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      addItem(task, list);
-      setTask('');
-      addItemRef.current.focus();
+      addItem(task, list)
+      setTask('')
+      addItemRef.current.focus()
     } catch (error) {
-      addItemRef.current.focus();
+      addItemRef.current.focus()
     }
-  };
+  }
 
   return (
     <ListStyled done={data.done}>
@@ -57,7 +57,7 @@ export default function List({ data, index: list }) {
                 list={list}
                 data={card}
               />
-            );
+            )
         })}
 
         {data.cards.length > 0 || data.creatable ? null : (
@@ -72,12 +72,12 @@ export default function List({ data, index: list }) {
         />
       </ul>
     </ListStyled>
-  );
+  )
 }
 
 interface CreateTaskProps {
-  done?: boolean;
-  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+  done?: boolean
+  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void
 }
 
 const CreateTask = styled.form<CreateTaskProps>`
@@ -159,9 +159,16 @@ const CreateTask = styled.form<CreateTaskProps>`
       position: absolute;
     }
   }
-`;
+`
 
 const ListStyled = styled.div<CreateTaskProps>`
+user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+
+  
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
@@ -200,6 +207,7 @@ const ListStyled = styled.div<CreateTaskProps>`
   }
 
   .headerbar {
+    
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -220,4 +228,4 @@ const ListStyled = styled.div<CreateTaskProps>`
     height: 100%;
     margin-top: 10px;
   }
-`;
+`

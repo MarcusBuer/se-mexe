@@ -1,19 +1,18 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-import List from './List';
-
-import { useTodo } from '../../contexts/Todo';
+import { useTodo } from '../../contexts/Todo'
+import List from './List'
 
 export default function Board() {
-  const { lists } = useTodo();
+  const { lists } = useTodo()
   return (
     <BoardStyled>
       {lists.map((list, index) => (
         <List key={list.title} data={list} index={index} />
       ))}
     </BoardStyled>
-  );
+  )
 }
 
 const BoardStyled = styled.div`
@@ -24,4 +23,4 @@ const BoardStyled = styled.div`
   height: 100%;
   width: 100%;
   gap: 20px;
-`;
+`

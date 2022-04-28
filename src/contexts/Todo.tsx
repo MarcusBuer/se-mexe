@@ -1,19 +1,19 @@
-import React from 'react';
-import produce, { Immutable } from 'immer';
+import produce, { Immutable } from 'immer'
+import React from 'react'
 
-import usePersistedState from '../hooks/usePersistedState';
+import usePersistedState from '../hooks/usePersistedState'
 
 type iList = Immutable<{
-  title: string;
-  creatable: boolean;
-  done: boolean;
+  title: string
+  creatable: boolean
+  done: boolean
   cards: [
     {
-      id: number;
-      content: string;
+      id: number
+      content: string
     },
-  ];
-}>[];
+  ]
+}>[]
 
 export const TodoContext = React.createContext({
   move: (
@@ -25,11 +25,11 @@ export const TodoContext = React.createContext({
   removeItem: (list: Number, id: Number) => {},
   addItem: (task: String, list: Number) => {},
   lists: [],
-});
+})
 
 type Props = {
-  children?: JSX.Element | JSX.Element[];
-};
+  children?: JSX.Element | JSX.Element[]
+}
 
 const baseList = [
   {
@@ -50,53 +50,53 @@ const baseList = [
     done: true,
     cards: [],
   },
-];
+]
 
 export function TodoProvider({ children }: Props) {
-  const [lists, setLists] = usePersistedState<iList>('lista', baseList);
+  const [lists, setLists] = usePersistedState<iList>('lista', baseList)
 
   const move = (source, sourceList, target, targetList) => {
     setLists(
       produce(lists, draft => {
-        const dragged = draft[sourceList].cards[source];
-        draft[sourceList].cards.splice(source, 1);
-        draft[targetList].cards.splice(target, 0, dragged);
+        const dragged = draft[sourceList].cards[source]
+        draft[sourceList].cards.splice(source, 1)
+        draft[targetList].cards.splice(target, 0, dragged)
       }),
-    );
-  };
+    )
+  }
 
   const addItem = item => {
-    if (item.length === 0) throw new Error('Item cannot be empty');
-    const timeStamp = Date.now();
+    if (item.length === 0) throw new Error('Item cannot be empty')
+    const timeStamp = Date.now()
     setLists(
       produce(lists, draft => {
-        const newItem = { id: timeStamp, content: item };
-        draft[0].cards.push(newItem);
+        const newItem = { id: timeStamp, content: item }
+        draft[0].cards.push(newItem)
       }),
-    );
-  };
+    )
+  }
 
   const removeItem = (list, id) => {
     setLists(
       produce(lists, draft => {
-        draft[list].cards.splice(id, 1);
+        draft[list].cards.splice(id, 1)
       }),
-    );
-  };
+    )
+  }
 
   return (
     <TodoContext.Provider value={{ lists, move, addItem, removeItem }}>
       {children}
     </TodoContext.Provider>
-  );
+  )
 }
 
 export function useTodo() {
-  const context = React.useContext(TodoContext);
+  const context = React.useContext(TodoContext)
 
   if (context === undefined) {
-    throw new Error('Context was used outside of its Provider');
+    throw new Error('Context was used outside of its Provider')
   }
 
-  return context;
+  return context
 }

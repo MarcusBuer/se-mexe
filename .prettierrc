@@ -1,10 +1,13 @@
 {
   "trailingComma": "all",
   "tabWidth": 2,
-  "semi": true,
+  "semi": false,
   "singleQuote": true,
   "useTabs": false,
   "jsxSingleQuote": true,
   "arrowParens": "avoid",
-  "bracketSpacing": true
+  "bracketSpacing": true,
+  "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }

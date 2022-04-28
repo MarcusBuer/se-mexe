@@ -1,24 +1,24 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
-import { useDrag, useDrop } from 'react-dnd';
-import { useTodo } from '../../contexts/Todo';
-import { MdRemove } from 'react-icons/md';
+import React from 'react'
+import styled, { css } from 'styled-components'
+import { useDrag, useDrop } from 'react-dnd'
+import { useTodo } from '../../contexts/Todo'
+import { MdRemove } from 'react-icons/md'
 
 interface iProps {
-  index: number;
-  data: any;
-  list: number;
-  canDrag: boolean;
+  index: number
+  data: any
+  list: number
+  canDrag: boolean
 }
 
 export default function Card({ data, index, list, canDrag }: iProps) {
-  const ref = React.useRef(null);
-  const { move, removeItem } = useTodo();
+  const ref = React.useRef(null)
+  const { move, removeItem } = useTodo()
 
   interface iTeste {
-    list: number;
-    index: number;
-    canDrag: boolean;
+    list: number
+    index: number
+    canDrag: boolean
   }
 
   const [{ isDragging }, dragRef] = useDrag({
@@ -28,54 +28,54 @@ export default function Card({ data, index, list, canDrag }: iProps) {
         list,
         index,
         canDrag,
-      };
+      }
     },
     collect: (monitor: any) => ({
       isDragging: monitor.isDragging(),
     }),
-  });
+  })
 
   const [, dropRef] = useDrop({
     accept: 'CARD',
     hover(item: iTeste, monitor) {
-      if (!item.canDrag) return;
-      const source = item.index;
-      const target = index;
+      if (!item.canDrag) return
+      const source = item.index
+      const target = index
 
-      const sourceList = item.list;
-      const targetList = list;
+      const sourceList = item.list
+      const targetList = list
 
-      if (source === target && sourceList === targetList) return;
+      if (source === target && sourceList === targetList) return
 
-      const targetPosition = ref.current.getBoundingClientRect();
+      const targetPosition = ref.current.getBoundingClientRect()
       const targetVerticalCenter =
-        (targetPosition.bottom - targetPosition.top) / 2;
+        (targetPosition.bottom - targetPosition.top) / 2
 
-      const sourceOffset = monitor.getClientOffset();
-      const sourceTop = sourceOffset.y - targetPosition.top;
+      const sourceOffset = monitor.getClientOffset()
+      const sourceTop = sourceOffset.y - targetPosition.top
 
       if (
         source < target &&
         sourceTop < targetVerticalCenter &&
         sourceList === targetList
       )
-        return;
+        return
 
       if (
         source > target &&
         sourceTop > targetVerticalCenter &&
         sourceList === targetList
       )
-        return;
+        return
 
-      move(source, sourceList, target, targetList);
+      move(source, sourceList, target, targetList)
 
-      item.index = target;
-      item.list = targetList;
+      item.index = target
+      item.list = targetList
     },
-  });
+  })
 
-  dragRef(dropRef(ref));
+  dragRef(dropRef(ref))
 
   return (
     <CardStyled
@@ -90,12 +90,12 @@ export default function Card({ data, index, list, canDrag }: iProps) {
         <MdRemove size={22} />
       </button>
     </CardStyled>
-  );
+  )
 }
 
 interface CardStyledProps {
-  canDrag: boolean;
-  isDragging: boolean;
+  canDrag: boolean
+  isDragging: boolean
 }
 
 const CardStyled = styled.li<CardStyledProps>`
@@ -190,4 +190,4 @@ const CardStyled = styled.li<CardStyledProps>`
         opacity: 0;
       }
     `}
-`;
+`
