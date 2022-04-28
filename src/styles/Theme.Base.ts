@@ -8,6 +8,7 @@ const Theme = {
   label: 'Base Theme',
 
   colors: {
+    background: '#f5f5f5',
     text: '#333',
     navbartext: '#333',
     navbarhover: '#f21',

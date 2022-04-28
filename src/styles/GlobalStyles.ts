@@ -79,6 +79,7 @@ table {
 
   body {
     margin: 0 auto;
+    padding: 0 1rem;
     font-family: var(--font-main);
     color: ${props => props.theme.colors.text};
     max-width: var(--max-width);
@@ -94,7 +95,7 @@ table {
     transition: var(--transition);
   }
   a:hover {
-    color: ${props => props.theme.colors.accent};
+    color: ${props => props.theme.colors.text};
   }
 
   button {

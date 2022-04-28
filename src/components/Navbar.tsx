@@ -16,7 +16,7 @@ export default function Navbar() {
         <LinkStyled to='/'>Inicial</LinkStyled>
         <LinkStyled to='/session'>Inicie uma sessão</LinkStyled>
         <ButtonStyled onClick={theme.toggleTheme}>
-          {theme.current.title === 'Light' ? 'Dark Mode' : 'Light Mode'}
+          {theme.current.title === 'Light' ? 'Modo Escuro' : 'Modo Claro'}
         </ButtonStyled>
       </div>
     </NavbarStyled>
@@ -24,9 +24,16 @@ export default function Navbar() {
 }
 
 const NavbarStyled = styled.nav`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: var(--max-width);
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 1rem;
 
   .Logo {
     font-size: 1.5rem;
