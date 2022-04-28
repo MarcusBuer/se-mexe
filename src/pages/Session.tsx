@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Board from '../components/Todo/Board';
 import { TodoProvider } from '../contexts/Todo';
 

@@ -3,7 +3,22 @@ import produce from 'immer';
 
 import usePersistedState from '../hooks/usePersistedState';
 
-export const TodoContext = React.createContext({});
+interface iCards {
+  id: number;
+  content: string;
+}
+
+export const TodoContext = React.createContext({
+  move: (
+    source: Number,
+    sourceList: Number,
+    target: Number,
+    targetList: Number,
+  ) => {},
+  removeItem: (list: Number, id: Number) => {},
+  addItem: (task: String, list: Number) => {},
+  lists: [],
+});
 
 type Props = {
   children?: JSX.Element | JSX.Element[];
