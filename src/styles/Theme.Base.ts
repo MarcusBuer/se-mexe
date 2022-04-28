@@ -13,11 +13,11 @@ const Theme = {
     navbartext: '#333',
     navbarhover: '#f21',
 
-    todoInputBackground: '#e1e1e1',
+    todoInputBackground: '#eee',
     todoBackground: '#ccc',
 
-    clockBackground: '#333',
-    clockText: '#f5f5f5',
+    clockBackground: '#ddd',
+    clockText: '#333',
   },
 };
 

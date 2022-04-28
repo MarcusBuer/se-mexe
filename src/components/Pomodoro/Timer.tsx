@@ -2,13 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 
 export default function Timer() {
+  const [intervals, setIntervals] = React.useState([
+    { title: 'Trabalho', time: 45 },
+    { title: 'Intervalo', time: 15 },
+    { title: 'Trabalho', time: 45 },
+    { title: 'Intervalo', time: 15 },
+    { title: 'Trabalho', time: 45 },
+    { title: 'Descanso', time: 30 },
+  ]);
+  const [current, setCurrent] = React.useState(0);
   const [renderedStreamDuration, setRenderedStreamDuration] =
-      React.useState('00:00:00'),
-    streamDuration = React.useRef(0),
-    previousTime = React.useRef(0),
-    requestAnimationFrameId = React.useRef(null),
-    [isStartTimer, setIsStartTimer] = React.useState(false),
-    [isStopTimer, setIsStopTimer] = React.useState(false);
+    React.useState('00:00:00');
+  const streamDuration = React.useRef(0);
+  const previousTime = React.useRef(0);
+  const requestAnimationFrameId = React.useRef(null);
+  const [isStartTimer, setIsStartTimer] = React.useState(false);
+  const [isStopTimer, setIsStopTimer] = React.useState(false);
 
   const updateTimer = React.useCallback(() => {
     let now = performance.now();
@@ -57,10 +66,29 @@ export default function Timer() {
     cancelAnimationFrame(requestAnimationFrameId.current);
   };
 
+  const changeIntervalHandler = () => {
+    current === intervals.length - 1 ? setCurrent(0) : setCurrent(current + 1);
+    stopHandler();
+    setTimeout(() => startHandler(), 1000);
+  };
+
+  React.useEffect(() => {
+    if (
+      Number(renderedStreamDuration[3] + renderedStreamDuration[4]) >=
+      Number(intervals[current].time)
+    ) {
+      changeIntervalHandler();
+    }
+  }, [renderedStreamDuration]);
+
+  const handleChangeInterval = index => {
+    if (!isStartTimer) setCurrent(index);
+  };
+
   return (
     <TimerStyled>
       <div className='header'></div>
-      <div className='timer'>
+      <div className='timer non-selectable'>
         <p>{renderedStreamDuration[3]}</p>
         <p>{renderedStreamDuration[4]}</p>
         <p
@@ -73,25 +101,17 @@ export default function Timer() {
         <p>{renderedStreamDuration[6]}</p>
         <p>{renderedStreamDuration[7]}</p>
       </div>
-      <div className='intervalos'>
-        <div className='active'>
-          Trabalho<p>30 minutos</p>
-        </div>
-        <div>
-          pausa<p>15 minutos</p>
-        </div>
-        <div>
-          trabalho<p>40 minutos</p>
-        </div>
-        <div>
-          pausa<p>15 minutos</p>
-        </div>
-        <div>
-          trabalho<p>40 minutos</p>
-        </div>
-        <div>
-          descanso<p>30 minutos</p>
-        </div>
+      <div className='intervalos non-selectable'>
+        {intervals.map((interval, index) => (
+          <div
+            key={interval.title + index}
+            onClick={() => handleChangeInterval(index)}
+            className={`${current === index ? 'active' : null}`}
+          >
+            {interval.title}
+            <p>{interval.time} minutos</p>
+          </div>
+        ))}
       </div>
       <div className='botoes'>
         <button onClick={startHandler}>Iniciar</button>
@@ -112,6 +132,14 @@ const TimerStyled = styled.div`
   width: 100%;
   margin-right: 20px;
 
+  .non-selectable {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+
   .timer {
     display: flex;
     justify-content: space-around;
@@ -125,6 +153,7 @@ const TimerStyled = styled.div`
       color: ${props => props.theme.colors.clockBackground};
       background: ${props => props.theme.colors.background};
       border: none;
+      text-shadow: 0 0 4px ${props => props.theme.colors.clockText};
     }
 
     .dotBlink {
@@ -135,6 +164,7 @@ const TimerStyled = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
       flex: 1 0 auto;
       height: 100px;
       width: 100px;
@@ -163,6 +193,7 @@ const TimerStyled = styled.div`
       font-size: 14px;
       font-weight: 500;
       text-transform: uppercase;
+      transition: background-color 0.5s ease-in-out;
 
       background-color: ${props => props.theme.colors.clockBackground};
       color: ${props => props.theme.colors.clockText};
