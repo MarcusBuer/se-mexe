@@ -8,7 +8,7 @@ export default function Board() {
   const { lists } = useTodo()
   return (
     <BoardStyled 
-      ignoreElements='.card .input' 
+      ignoreElements='.card' 
       nativeMobileScroll={false} 
       vertical={true}
       horizontal={true}
