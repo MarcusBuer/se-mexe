@@ -1,8 +1,9 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
 import { useDrag, useDrop } from 'react-dnd'
-import { useTodo } from '../../contexts/Todo'
+
 import { MdRemove } from 'react-icons/md'
+import React from 'react'
+import { useTodo } from '../../contexts/Todo'
 
 interface iProps {
   index: number
@@ -68,6 +69,7 @@ export default function Card({ data, index, list, canDrag }: iProps) {
       )
         return
 
+      
       move(source, sourceList, target, targetList)
 
       item.index = target
@@ -82,6 +84,7 @@ export default function Card({ data, index, list, canDrag }: iProps) {
       canDrag={canDrag}
       ref={ref}
       isDragging={canDrag ? isDragging : false}
+      className={canDrag ? `card`:''}
     >
       <header className='cardHeader'>
         <p>{data.content}</p>
@@ -126,10 +129,10 @@ const CardStyled = styled.li<CardStyledProps>`
     width: 100%;
     align-items: center;
     justify-content: flex-start;
-    font-size: 14px;
+    font-size: 100%;
     font-weight: 500;
     line-height: 20px;
-    word-break: break-all;
+    word-break: keep-all;
     word-wrap: break-word;
     white-space: normal;
   }

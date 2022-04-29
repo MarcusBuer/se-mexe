@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import { usePomodoro } from '../../contexts/Pomodoro'
 
 export default function Clock() {
@@ -27,9 +26,6 @@ const ClockStyled = styled.div`
   -ms-user-select: none;
 
   display: flex;
-  justify-content: space-around;
-  max-width: 50%;
-  margin: 10px auto;
   gap: 5px;
 
   .dot {
@@ -47,15 +43,15 @@ const ClockStyled = styled.div`
 
   p {
     display: flex;
+    flex: 1;
     align-items: center;
     justify-content: center;
     text-align: center;
-    flex: 1 0 auto;
-    height: 100px;
-    width: 100px;
+
+    padding: 10px 0;
     background-color: ${props => props.theme.colors.clockBackground};
     color: ${props => props.theme.colors.clockText};
-    font-size: 84px;
+    font-size: 42px;
     border-radius: 4px;
     border: 2px solid ${props => props.theme.colors.clockText};
   }

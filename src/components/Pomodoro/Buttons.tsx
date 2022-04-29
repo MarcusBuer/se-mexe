@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-
 import { usePomodoro } from '../../contexts/Pomodoro'
 
 export default function Buttons() {
@@ -21,20 +20,22 @@ export default function Buttons() {
 }
 
 const ButtonsStyled = styled.div`
+  margin: 10px 0;
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  justify-content: space-between;
+  border-radius: 8px;
+
+  & :first-child {border-radius: 8px 0 0 8px;}
+  & :last-child  {border-radius: 0 8px 8px 0;}
 
   button {
-    width: 100px;
-    height: 40px;
-    border-radius: 4px;
+    width: 100%;
     border: none;
 
     background-color: ${props => props.theme.colors.clockBackground};
     color: ${props => props.theme.colors.clockText};
-    font-size: 14px;
-    border: 2px solid ${props => props.theme.colors.clockBackground};
+    font-size: 80%;
+    font-weight: 500;
 
     :hover:enabled {
       background-color: ${props => props.theme.colors.clockText};

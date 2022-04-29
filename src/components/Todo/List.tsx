@@ -1,9 +1,8 @@
-import React from 'react'
-import { MdAdd } from 'react-icons/md'
-import styled from 'styled-components'
-
-import { useTodo } from '../../contexts/Todo'
 import Card from './Card'
+import { MdAdd } from 'react-icons/md'
+import React from 'react'
+import styled from 'styled-components'
+import { useTodo } from '../../contexts/Todo'
 
 export default function List({ data, index: list }) {
   const addItemRef = React.useRef(null)
@@ -35,6 +34,7 @@ export default function List({ data, index: list }) {
           <CreateTask onSubmit={handleSubmit}>
             <header className='cardHeader'>
               <input
+                className='input'
                 ref={addItemRef}
                 type='text'
                 placeholder='Adicione uma tarefa'
@@ -61,10 +61,10 @@ export default function List({ data, index: list }) {
         })}
 
         {data.cards.length > 0 || data.creatable ? null : (
-          <div className='empty'>Lista vazia, adicione um item aqui</div>
+          <div className='empty'>Lista vazia<br/>adicione um item aqui</div>
         )}
         <Card
-          key={-100}
+          key={0}
           index={0}
           canDrag={false}
           list={list}
@@ -103,7 +103,7 @@ const CreateTask = styled.form<CreateTaskProps>`
     padding: 0;
   }
 
-  input {
+  .input {
     border: 0;
     outline: 0;
     background: ${props => props.theme.colors.todoInputBackground};
@@ -113,7 +113,7 @@ const CreateTask = styled.form<CreateTaskProps>`
     align-items: center;
     justify-content: flex-start;
     font-family: 'Poppins', sans-serif;
-    font-size: 14px;
+    font-size: 80%;
     font-weight: 500;
     line-height: 20px;
     word-break: break-all;
@@ -142,7 +142,7 @@ const CreateTask = styled.form<CreateTaskProps>`
     justify-content: center;
     width: 24px;
     height: 24px;
-    margin: 0 0 0 10px;
+    margin: 0 0 0 clamp(0px, .5vw, 10px);
     border-radius: 50%;
     background-color: ${props => props.theme.colors.text};
     color: ${props => props.theme.colors.background};
@@ -167,14 +167,11 @@ user-select: none;
   -webkit-user-drag: none;
   -webkit-user-select: none;
   -ms-user-select: none;
-
   
   display: flex;
   flex-direction: column;
   flex-basis: 100%;
-  width: 0;
-  height: 100%;
-  opacity: ${props => (props.done ? 0.5 : 1)};
+  min-width: 150px;
 
   .title {
     display: flex;
@@ -186,11 +183,12 @@ user-select: none;
       opacity: 80%;
       font-size: 75%;
       font-weight: 400;
+      letter-spacing: 2px;
       &:before {
-        content: '( ';
+        content: '(';
       }
       &:after {
-        content: ' )';
+        content: ')';
       }
     }
   }
@@ -198,12 +196,15 @@ user-select: none;
   .empty {
     z-index: 0;
     position: absolute;
-    top: 20px;
+    top: 8px;
     left: 0%;
     right: 0%;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    line-height: 20px;
+    font-weight: 300;
   }
 
   .headerbar {
@@ -227,5 +228,9 @@ user-select: none;
     flex-grow: 1;
     height: 100%;
     margin-top: 10px;
+  }
+
+  .card {
+    opacity: ${props => (props.done ? 0.5 : 1)};
   }
 `

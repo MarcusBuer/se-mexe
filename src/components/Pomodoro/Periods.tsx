@@ -1,6 +1,6 @@
-import React from 'react'
 import styled, { css } from 'styled-components'
 
+import React from 'react'
 import { usePomodoro } from '../../contexts/Pomodoro'
 
 export default function Periods() {
@@ -15,7 +15,7 @@ export default function Periods() {
           className={`${current === index ? 'active' : null}`}
         >
           {interval.title}
-          <p>{interval.time} minutos</p>
+          <p>{interval.time} min</p>
         </div>
       ))}
     </PeriodsStyled>
@@ -33,41 +33,43 @@ const PeriodsStyled = styled.div<PeriodsProps>`
   -webkit-user-select: none;
   -ms-user-select: none;
 
-  margin: 10px 0;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   max-width: 100%;
+  border: 2px solid ${props => props.theme.colors.clockText};
 
   div {
     display: flex;
     flex-direction: column;
     flex: 1;
+    width: 100%;
+    overflow: hidden;
     align-items: center;
     justify-content: center;
-    height: 120px;
-    width: 120px;
-    font-size: 14px;
-    font-weight: 500;
+
+    padding: 10px 0;
+    font-size: 70%;
+    font-weight: 700;
     text-transform: uppercase;
     transition: background-color 0.5s ease-in-out;
 
     background-color: ${props => props.theme.colors.clockBackground};
     color: ${props => props.theme.colors.clockText};
     border: -2px solid ${props => props.theme.colors.clockBackground};
-    border-left: 2px solid ${props => props.theme.colors.clockText};
+    border: 1px solid ${props => props.theme.colors.clockText};
 
     p {
       margin-top: 5px;
-      font-size: 13px;
-      font-weight: 400;
+      font-size: 100%;
+      font-weight: 500;
 
       :before {
         content: '( ';
-        font-size: 12px;
+        font-size: 10px;
       }
       :after {
         content: ' )';
-        font-size: 12px;
+        font-size: 10px;
       }
     }
   }
@@ -75,9 +77,6 @@ const PeriodsStyled = styled.div<PeriodsProps>`
     background-color: ${props => props.theme.colors.clockText};
     color: ${props => props.theme.colors.clockBackground};
     border: 2px solid ${props => props.theme.colors.clockText};
-  }
-  & > :last-child {
-    border-right: 2px solid ${props => props.theme.colors.clockText};
   }
 
   ${props=>props.isPlaying && css`
