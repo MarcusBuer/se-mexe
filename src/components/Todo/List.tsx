@@ -11,13 +11,10 @@ export default function List({ data, index: list }) {
 
   const handleSubmit = e => {
     e.preventDefault()
-    try {
+    addItemRef.current.focus()
       addItem(task, list)
       setTask('')
-      addItemRef.current.focus()
-    } catch (error) {
-      addItemRef.current.focus()
-    }
+      addItemRef.current.blur();
   }
 
   return (
